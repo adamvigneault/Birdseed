@@ -73,7 +73,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Pass packages to the frontend
-var common = ['jquery', 'backbone', 'underscore'];
+var common = ['jquery', 'backbone', 'underscore','linkifyjs','linkifyjs/html','linkifyjs/plugins/hashtag'];
 app.get("/javascripts/bundle.js",
   browserify(common));
 app.get("/javascripts/app.js",

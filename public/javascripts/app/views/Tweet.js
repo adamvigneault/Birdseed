@@ -1,6 +1,8 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
 var _ = require('underscore');
+var linkify = require('linkifyjs');
+var linkifyHTML = require('linkifyjs/html');
 
 var TweetTemplate = require('../templates/tweet.ejs');
 var TweetModel = require('../models/TweetModel');
@@ -24,6 +26,10 @@ var TweetView = module.exports = Backbone.View.extend({
         return this;
     },
     render : function() {
+        var text = this.model.get("text");
+        text = linkifyHTML(text);
+        this.model.attributes['text'] = text;
+
         this.$el.append(this.template(this.model.attributes));
 
         return this;
