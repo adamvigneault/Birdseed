@@ -16,6 +16,13 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Attributes
+attrs = {
+  "query" : "monkeys",
+  "maxCount" : 25,
+  "user" : "FlashFreeze"
+}
+
 /** 
  * Start polling twitter
  */
@@ -33,7 +40,7 @@ require('./certs.js')(function(authenticated, error) {
   var updateUser = function() {
     client.get(
       "users/show",
-      {screen_name : "ThanxInc"},
+      {screen_name : attrs.user},
       function(error, userData, res) {
         app.locals.birdie = userData;
       }
@@ -54,7 +61,7 @@ require('./certs.js')(function(authenticated, error) {
   (function twitterPoll() {
     client.get(
       "search/tweets",
-      {q: "thanxinc", count:"25"},
+      {q: attrs.query, count: attrs.maxCount},
       function(error, tweets, res) {
         updateUser();
         storeTweets(tweets.statuses);
