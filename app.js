@@ -18,9 +18,9 @@ app.set('view engine', 'ejs');
 
 // Attributes
 attrs = {
-  "query" : "monkeys",
+  "query" : "ThanxInc",
   "maxCount" : 25,
-  "user" : "FlashFreeze"
+  "user" : "ThanxInc"
 }
 
 /** 
