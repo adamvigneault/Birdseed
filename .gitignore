@@ -1,3 +1,9 @@
+# Node repos
+node_modules
+
+# VSCode
+.vscode
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
