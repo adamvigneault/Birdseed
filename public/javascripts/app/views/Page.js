@@ -23,9 +23,12 @@ var PageView = module.exports = Backbone.View.extend({
         return this;
     },
     render : function() {
-        var profile = new Profile();
+        var socket = this.model.get("socket");
+        var profile = new Profile({
+            socket : socket
+        });
         var tweetSet = new TweetSet({
-            socket : this.model.get("socket")
+            socket : socket
         });
 
         profile.setElement('section#profile');

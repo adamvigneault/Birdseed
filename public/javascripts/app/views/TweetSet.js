@@ -18,7 +18,6 @@ var TweetSet = module.exports = Backbone.View.extend({
         var that = this;
 
         this.collection = new TweetCollection();
-        this.collection.comparator = "id";
         this.collection.on("update", function(tweets, options) {
             // Remove models if the collection starts getting too long
             while (this.length>that.setMaxLength) {
@@ -30,13 +29,15 @@ var TweetSet = module.exports = Backbone.View.extend({
         this.collection.fetch();
         // listen for updates from socket
         if (this.socket) this.socket.on("update tweets", function(tweets) {
-           that.collection.add(tweets, {merge:true});
+            if (that.pause) return;
+            that.collection.add(tweets, {merge:true});
         });
 
+        this.render();
         return this;
     },
     render : function() {
-        this.addAll(this.collection);
+        this.start();
 
         return this;
     },
@@ -71,4 +72,11 @@ var TweetSet = module.exports = Backbone.View.extend({
         return this;
     },
     removeOne : function(tweet) {},
+    start : function() {
+        var that = this;
+
+        $(window).scroll(function(e) {
+            that.pause = (this.scrollY>0);
+        });
+    }
 });

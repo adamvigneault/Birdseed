@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 
 // Attributes
 attrs = {
-  "query" : "ThanxInc",
+  "query" : "thanxinc",
   "maxCount" : 25,
   "user" : "ThanxInc"
 }
@@ -43,6 +43,7 @@ require('./certs.js')(function(authenticated, error) {
       {screen_name : attrs.user},
       function(error, userData, res) {
         app.locals.birdie = userData;
+        ioApi.updateProfile(userData);
       }
     );
   };

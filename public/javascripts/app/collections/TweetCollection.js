@@ -5,5 +5,6 @@ var TweetModel = require('../models/TweetModel');
 
 var TweetCollection = module.exports = Backbone.Collection.extend({
     url : "/tweets",
-    model : TweetModel
+    model : TweetModel,
+    comparator : "id"
 });

@@ -9,6 +9,7 @@ Backbone.$ = $;
 
 var ProfileView = module.exports = Backbone.View.extend({
     template : ProfileTemplate,
+    socket : null,
     initialize : function(attrs) {
         _.extend(this, attrs);
         var that = this;
@@ -19,9 +20,14 @@ var ProfileView = module.exports = Backbone.View.extend({
         });
         this.model.fetch();
 
+        if (this.socket) this.socket.on("update profile", function(profile) {
+            that.model.set(profile);
+        });
+
         return this;
     },
     render : function() {
+        this.$el.empty();
         var user = this.template(this.model.attributes);
 
         this.$el.append(user);
