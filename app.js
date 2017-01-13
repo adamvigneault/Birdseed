@@ -18,9 +18,9 @@ app.set('view engine', 'ejs');
 
 // Attributes
 attrs = {
-  "query" : "thanxinc",
+  "query" : "javascript",
   "maxCount" : 25,
-  "user" : "ThanxInc"
+  "user" : "FlashFreeze"
 }
 
 /** 
@@ -81,7 +81,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Pass packages to the frontend
-var common = ['jquery', 'backbone', 'underscore','linkifyjs','linkifyjs/html','linkifyjs/plugins/hashtag'];
+var common = ['jquery', 'backbone', 'underscore','linkifyjs',
+              'linkifyjs/html'];
 app.get("/javascripts/bundle.js",
   browserify(common));
 app.get("/javascripts/app.js",
